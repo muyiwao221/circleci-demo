@@ -1,4 +1,7 @@
-// This function changes the style display parameter on the button when clicked and allows it to be visible
+// This function inserts the text upon being called, and then disables the click button
 function openSesame() {
-    document.getElementById("clickMessage").style.display = 'block';
+    var text = "Thank you for considering my application!";
+    document.getElementById("clickMessage").textContent += text;
+    document.getElementById("clickButton").disabled = true;
+    return text;
 }
