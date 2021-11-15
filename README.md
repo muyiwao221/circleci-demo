@@ -1,1 +1,2 @@
-# circlecinterview
+Circle CI Technical Challenge - Build and Test
+This is just a simple webpage built with HTML and JavaScript that has a clickable button. When clicked, the button will display a "Thank you for considering my application!" message.

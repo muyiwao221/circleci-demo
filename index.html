@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/click-script.js"></script>
+    </head>
+    <title>CircleCI Technical Challenge</title>
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
+    <style>
+        .clickbutton {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .logo {
+            margin: 0;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .message {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            position: absolute;
+            top: 53%;
+            left: 50%;
+            font-size: 20px;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .name {
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .trademark {
+            font-size: 10px;
+            margin: 0;
+            position: absolute;
+            top: 95%;
+            left: 81%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <body style="background-color: rgb(63, 117, 117);">
+        <div class="logo">
+            <img src="images/circlecilogo.png" alt="CircleCI Logo">    
+        </div>
+        <div class="name">
+            <p>Technical Communication Challenge - Moo Olaniyan</p>
+        </div>
+        <div class="clickbutton">
+            <button type="button" onclick="openSesame()">Click Here</button>
+        </div>
+        <div class="message">
+            <p id="clickMessage" style="display: none;">Thank you for considering my application!</p>
+        </div>
+        <div class="trademark">
+            <p>CircleCI&trade; Logo is a trademark or registered trademark of Circle Internet Services, Inc.</p>
+        </div>
+    </body>
+</html>
