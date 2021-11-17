@@ -12,7 +12,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - testbuild
-        filters:
-          branches:
-            only: main
+      - testbuild:
+          filters:
+            branches:
+              only: main
