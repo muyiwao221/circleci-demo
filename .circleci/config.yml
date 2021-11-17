@@ -14,6 +14,9 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "30:4f:cd:85:dd:7b:f1:29:b6:bf:fb:71:a3:bc:6b:f7"
       - run:
           name: Deploy to Homelab over SSH 
           command: |
