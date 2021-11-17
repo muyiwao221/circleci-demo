@@ -23,7 +23,13 @@ workflows:
   test-and-deploy:
     jobs:
       - testbuild
+          filters:
+            branches:
+              only: heroku-deploy
       - deploy:
+          filters:
+            branches:
+              only: heroku-deploy
           requires:
             - testbuild
 
