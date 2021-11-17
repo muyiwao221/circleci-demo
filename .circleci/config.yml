@@ -12,18 +12,23 @@ jobs:
   deploy:
     working_directory: ~/circleci-techchallenge
     docker:
-      - image: cimg/node:17.1.0
+      - image: cimg/base:2021.04
     steps:
-      - checkout
       - run:
-          name: Deploy to Heroku
+          name: Deploy to Homelab over SSH 
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
+            ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "git -C /var/www/circleci/circlecinterview pull origin main"
 workflows:
   test-and-deploy:
     jobs:
-      - testbuild
+      - testbuild:
+          filters:
+            branches:
+              only: homelab-deploy
       - deploy:
+          filters:
+            branches:
+              only: homelab-deploy
           requires:
             - testbuild
 
