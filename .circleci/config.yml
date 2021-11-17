@@ -9,8 +9,18 @@ jobs:
       - checkout
       - run: npm install jest --save-dev
       - run: npm test
-
+  deploy:
+      machine:
+        enabled: true
+      steps:
+        - run:
+          name: Deploy over SSH
+          command: |
+            ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "git -C /var/www/circleci/circlecinterview pull origin main"
 workflows:
-  build_and_test:
+  test_and_deploy:
     jobs:
       - testbuild
+      - deploy
+          requires:
+            - testbuild
