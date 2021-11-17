@@ -1,2 +1,2 @@
-Circle CI Technical Challenge - Build and Test.<br />
+<h1>Circle CI Technical Challenge - Build, Test, and Deploy.</h1><br />
 This is just a simple webpage built with HTML and JavaScript that has a clickable button. When clicked, the button will display a "Thank you for considering my application!" message. Additionally, this is built and tested using CircleCI and deployed on heroku. This heroku-deploy branch has a few edits to make sure that the heroku deployment works as intended.
