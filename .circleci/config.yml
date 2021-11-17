@@ -12,7 +12,7 @@ jobs:
   deploy:
     working_directory: ~/circleci-techchallenge
     docker:
-      - image: cimg/node:17.1.0
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
