@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  testbuild:
+    working_directory: ~/circleci-techchallenge
+    docker:
+      - image: cimg/node:17.1.0
+    steps:
+      - checkout
+      - run: npm install jest --save-dev
+      - run: npm test
+
+workflows:
+  build_and_test:
+    jobs:
+      - testbuild

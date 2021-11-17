@@ -1,0 +1,17 @@
+{
+  "name": "jest-button-test",
+  "version": "1.0.0",
+  "description": "CircleCI Technical Challenge",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
+  },
+  "dependencies": {
+    "jsdom": "^18.1.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
