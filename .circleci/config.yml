@@ -8,7 +8,7 @@ jobs:
     resource_class: medium
     steps:
       - checkout
-      - run: mkdir -p ./tmp/test-results
+      - run: mkdir -p ./tmp/
       - run: npm install jest --save-dev
       - run: npm test | tee ./tmp/test-results
       - store_test_results:
