@@ -5,16 +5,19 @@ jobs:
     working_directory: ~/circleci-techchallenge
     docker:
       - image: cimg/node:17.1.0
+    resource_class: medium
     steps:
       - checkout
+      - run: mkdir -p ./tmp/test-results
       - run: npm install jest --save-dev
       - run: npm test
       - store_test_results:
-          path: test-results
+          path: ./tmp/test-results
   deploy-heroku:
     working_directory: ~/circleci-techchallenge
     docker:
       - image: cimg/base:2021.04
+    resource_class: small
     steps:
       - checkout
       - run:
@@ -25,6 +28,7 @@ jobs:
     working_directory: ~/circleci-techchallenge
     docker:
       - image: cimg/base:2021.04
+    resource_class: small
     steps:
       - add_ssh_keys:
           fingerprints:
