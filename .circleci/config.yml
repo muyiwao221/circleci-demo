@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: mkdir -p ./tmp/test-results
       - run: npm install jest --save-dev
-      - run: npm test
+      - run: npm test | tee ./tmp/test-results
       - store_test_results:
           path: ./tmp/test-results
   deploy-heroku:
@@ -38,7 +38,7 @@ jobs:
           command: |
             ssh -p $SSH_PORT -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "git -C /var/www/circleci/circlecinterview pull origin homelab-deploy"
 workflows:
-  build-and-test:
+  build-test-deploy:
     jobs:
       - build
       - hold:
