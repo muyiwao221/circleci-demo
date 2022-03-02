@@ -10,13 +10,7 @@ jobs:
       - checkout
       - run: mkdir -p ./tmp/test-results
       - run: npm install jest --save-dev
-      - run:
-          name: Run Test
-          command: npm test
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./tmp/test-results/
-      - store_test_results:
-          path: ./tmp/test-results/
+      - run: npm test
   deploy-heroku:
     working_directory: ~/circleci-techchallenge
     docker:
