@@ -19,7 +19,7 @@ describe("Button Test", function() {
         jest.resetModules();
     });
     it("Button Click Test", function() {
-        expect(clickMessage.innerHTML).toBe("Thank you!!");
+        expect(clickMessage.innerHTML).toBe("Thank you!");
     });
     it("Button Click Test", function() {
         expect(global.document.getElementById('clickButton').disabled).toBe(true);
