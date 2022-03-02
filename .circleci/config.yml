@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  testbuild:
+  build:
     working_directory: ~/circleci-techchallenge
     docker:
       - image: cimg/node:17.1.0
@@ -9,10 +9,45 @@ jobs:
       - checkout
       - run: npm install jest --save-dev
       - run: npm test
+  deploy-heroku:
+    working_directory: ~/circleci-techchallenge
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git heroku-deploy:main
+  deploy-homelab:
+    working_directory: ~/circleci-techchallenge
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "30:4f:cd:85:dd:7b:f1:29:b6:bf:fb:71:a3:bc:6b:f7"
+      - run:
+          name: Deploy to Homelab over SSH 
+          command: |
+            ssh -p $SSH_PORT -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "git -C /var/www/circleci/circlecinterview pull origin homelab-deploy"
 workflows:
   build-and-test:
     jobs:
-      - testbuild:
+      - build:
+      - hold:
+          type: approval
+      - deploy-heroku:
+          requires:
+            - build
+            - hold
           filters:
             branches:
-              only: main
+              only: heroku-deploy
+      - deploy-homelab:
+          requires:
+            - build
+            - hold
+          filters:
+            branches:
+              only: homelab-deploy
