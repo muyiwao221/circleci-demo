@@ -8,11 +8,13 @@ jobs:
     resource_class: medium
     steps:
       - checkout
-      - run: mkdir -p tmp/
+      - run: mkdir -p ./tmp/test-results
       - run: npm install jest --save-dev
-      - run: npm test | tee /tmp/test-results
+      - run: npm test
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./tmp/test-results/
       - store_test_results:
-          path: tmp/
+          path: ./tmp/test-results/
   deploy-heroku:
     working_directory: ~/circleci-techchallenge
     docker:
