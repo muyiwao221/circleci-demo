@@ -8,11 +8,11 @@ jobs:
     resource_class: medium
     steps:
       - checkout
-      - run: mkdir -p ./tmp/
+      - run: mkdir -p tmp/
       - run: npm install jest --save-dev
-      - run: npm test | tee ./tmp/test-results
+      - run: npm test | tee /tmp/test-results
       - store_test_results:
-          path: ./tmp/test-results
+          path: tmp/
   deploy-heroku:
     working_directory: ~/circleci-techchallenge
     docker:
