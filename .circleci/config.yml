@@ -34,7 +34,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build:
+      - build
       - hold:
           type: approval
       - deploy-heroku:
