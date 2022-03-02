@@ -2,27 +2,39 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/circleci-techchallenge
+    working_directory: ~/circleci-demo
     docker:
       - image: cimg/node:17.1.0
+    resource_class: medium
     steps:
       - checkout
+      - run: mkdir -p ./tmp/test-results
       - run: npm install jest --save-dev
       - run: npm test
   deploy-heroku:
-    working_directory: ~/circleci-techchallenge
+    working_directory: ~/circleci-demo
     docker:
       - image: cimg/base:2021.04
+    resource_class: small
     steps:
       - checkout
       - run:
           name: Deploy to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git heroku-deploy:main
-  deploy-homelab:
-    working_directory: ~/circleci-techchallenge
+  deploy-in-parallel:
+    working_directory: ~/circleci-demo
     docker:
       - image: cimg/base:2021.04
+    resource_class: small
+    steps:
+      - checkout
+      - run: echo "This is running in parallel with the deploy"
+  deploy-homelab:
+    working_directory: ~/circleci-demo
+    docker:
+      - image: cimg/base:2021.04
+    resource_class: small
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -32,11 +44,13 @@ jobs:
           command: |
             ssh -p $SSH_PORT -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "git -C /var/www/circleci/circlecinterview pull origin homelab-deploy"
 workflows:
-  build-and-test:
+  build-test-deploy:
     jobs:
       - build
       - hold:
           type: approval
+          requires: 
+           - build
       - deploy-heroku:
           requires:
             - build
@@ -51,3 +65,12 @@ workflows:
           filters:
             branches:
               only: homelab-deploy
+      - deploy-in-parallel:
+          requires:
+            - build
+            - hold
+          filters:
+            branches:
+              only: 
+               - heroku-deploy
+               - homelab-deploy
