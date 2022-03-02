@@ -10,7 +10,9 @@ jobs:
       - checkout
       - run: mkdir -p ./tmp/test-results
       - run: npm install jest --save-dev
-      - run: npm test
+      - run:
+          name: Run Test
+          command: npm test
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./tmp/test-results/
       - store_test_results:
