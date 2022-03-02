@@ -9,6 +9,8 @@ jobs:
       - checkout
       - run: npm install jest --save-dev
       - run: npm test
+      - store_test_results:
+          path: test-results
   deploy-heroku:
     working_directory: ~/circleci-techchallenge
     docker:
