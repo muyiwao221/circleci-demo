@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-test:
     working_directory: ~/circleci-demo
     docker:
       - image: cimg/node:17.1.0
@@ -46,11 +46,11 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build
+      - build-and-test
       - hold:
           type: approval
           requires: 
-           - build
+           - build-and-test
           filters:
             branches:
               only: 
@@ -58,14 +58,14 @@ workflows:
                - homelab-deploy
       - deploy-heroku:
           requires:
-            - build
+            - build-and-test
             - hold
           filters:
             branches:
               only: heroku-deploy
       - deploy-homelab:
           requires:
-            - build
+            - build-and-test
             - hold
           filters:
             branches:
