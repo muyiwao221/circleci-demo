@@ -51,6 +51,11 @@ workflows:
           type: approval
           requires: 
            - build
+          filters:
+            branches:
+              only: 
+               - heroku-deploy
+               - homelab-deploy
       - deploy-heroku:
           requires:
             - build
@@ -69,3 +74,8 @@ workflows:
           requires:
             - build
             - hold
+          filters:
+            branches:
+              only: 
+               - heroku-deploy
+               - homelab-deploy
