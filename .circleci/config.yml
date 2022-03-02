@@ -72,7 +72,7 @@ workflows:
               only: homelab-deploy
       - deploy-in-parallel:
           requires:
-            - build
+            - build-and-test
             - hold
           filters:
             branches:
